@@ -50,7 +50,7 @@ const HomePage = () => {
 				const userChannels = await client.queryChannels({ members: { $in: [authUser._id] } }, { last_message_at: -1 });
 				setChannels(userChannels);
 			} catch (error) {
-				console.error("Error connecting or fetching channels:", error);
+				console.error("Error al conectar o obtener canales:", error);
 				toast.error("No se pudieron cargar los chats.");
 			} finally {
 				setLoadingChannels(false);
