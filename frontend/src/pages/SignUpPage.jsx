@@ -57,9 +57,9 @@ const SignUpPage = () => {
             <form onSubmit={handleSignup}>
               <div className="space-y-4">
                 <div>
-                  <h2 className="text-xl font-semibold">Create an Account</h2>
+                  <h2 className="text-xl font-semibold">Crear Cuenta</h2>
                   <p className="text-sm opacity-70">
-                    Join Streamify and start your language learning adventure!
+                  
                   </p>
                 </div>
 
@@ -67,7 +67,7 @@ const SignUpPage = () => {
                   {/* FULLNAME */}
                   <div className="form-control w-full">
                     <label className="label">
-                      <span className="label-text">Full Name</span>
+                      <span className="label-text">Nombre Completo</span>
                     </label>
                     <input
                       type="text"
@@ -95,7 +95,7 @@ const SignUpPage = () => {
                   {/* PASSWORD */}
                   <div className="form-control w-full">
                     <label className="label">
-                      <span className="label-text">Password</span>
+                      <span className="label-text">Contraseña</span>
                     </label>
                     <input
                       type="password"
@@ -106,7 +106,7 @@ const SignUpPage = () => {
                       required
                     />
                     <p className="text-xs opacity-70 mt-1">
-                      Password must be at least 6 characters long
+                      La contraseña debe tener al menos 6 caracteres.
                     </p>
                   </div>
 
@@ -114,9 +114,9 @@ const SignUpPage = () => {
                     <label className="label cursor-pointer justify-start gap-2">
                       <input type="checkbox" className="checkbox checkbox-sm" required />
                       <span className="text-xs leading-tight">
-                        I agree to the{" "}
-                        <span className="text-primary hover:underline">terms of service</span> and{" "}
-                        <span className="text-primary hover:underline">privacy policy</span>
+                        Estoy de acuerdo con el{" "}
+                        <span className="text-primary hover:underline">Terminos y Condiciones</span> y{" "}
+                        <span className="text-primary hover:underline">Politica y Privacidad</span>
                       </span>
                     </label>
                   </div>
@@ -126,7 +126,7 @@ const SignUpPage = () => {
                   {isPending ? (
                     <>
                       <span className="loading loading-spinner loading-xs"></span>
-                      Loading...
+                      Cargando...
                     </>
                   ) : (
                     "Create Account"
@@ -135,7 +135,7 @@ const SignUpPage = () => {
 
                 <div className="text-center mt-4">
                   <p className="text-sm">
-                    Already have an account?{" "}
+                   ¿Ya tienes una cuenta?{" "}
                     <Link to="/login" className="text-primary hover:underline">
                       Sign in
                     </Link>
@@ -155,9 +155,9 @@ const SignUpPage = () => {
             </div>
 
             <div className="text-center space-y-3 mt-6">
-              <h2 className="text-xl font-semibold">Connect with language partners worldwide</h2>
+              <h2 className="text-xl font-semibold">Conéctese con socios lingüísticos de todo el mundo</h2>
               <p className="opacity-70">
-                Practice conversations, make friends, and improve your language skills together
+                Practica conversaciones, haz amigos y mejoren sus habilidades lingüísticas juntos.
               </p>
             </div>
           </div>
