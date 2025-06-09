@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import useAuthUser from "../hooks/useAuthUser";
 import { useQuery } from "@tanstack/react-query";
@@ -27,6 +28,8 @@ const ChatPage = () => {
   const [channel, setChannel] = useState(null);
   const [loading, setLoading] = useState(true);
   const { authUser } = useAuthUser();
+
+   const navigate = useNavigate();
 
   // Obtenemos no solo los datos, sino también el estado de la consulta del token
   const tokenQuery = useQuery({
@@ -90,7 +93,7 @@ const ChatPage = () => {
       } catch (error) {
         console.error("Error initializing chat:", error);
       } finally {
-        if (isMounted) {
+        if (isMounted) {  
           setLoading(false);
         }
       }
@@ -105,7 +108,25 @@ const ChatPage = () => {
   }, [authUser, tokenQuery.isSuccess, tokenQuery.data, channelId]); // Dependemos del estado 'isSuccess'
 
   const isGroupChat = channel?.data?.member_count > 2;
-  const handleVideoCall = () => { /* ... */ };
+   const handleVideoCall = async () => {
+    if (!channel || !chatClient) return;
+
+    try {
+        const callId = channel.id; // Usamos el ID del canal como ID único para la llamada
+        const callLink = `${window.location.origin}/call/${callId}`;
+
+        // Enviar un mensaje al chat con el enlace a la llamada
+        await channel.sendMessage({
+            text: `¡Llamada iniciada! Únete aquí: ${callLink}`,
+        });
+
+        // Navegar a la página de la llamada
+        navigate(`/call/${callId}`);
+    } catch (error) {
+        console.error("Error creating video call:", error);
+        toast.error("No se pudo iniciar la llamada.");
+    }
+  };
 
   if (loading) return <ChatLoader />;
   if (!channel) return <div className="text-center p-8">Cargando chat o canal no encontrado...</div>;
