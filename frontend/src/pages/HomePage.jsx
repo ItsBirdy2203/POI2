@@ -6,6 +6,9 @@ import useAuthUser from "../hooks/useAuthUser.js";
 import { StreamChat } from "stream-chat";
 import CreateGroupChatModal from "../components/CreateGroupChatModal";
 import { getStreamToken } from "../lib/api";
+import { useQuery } from "@tanstack/react-query";
+import { getRecommendedUsers, getOutgoingFriendReqs } from "../lib/api";
+import UserCard from "../components/UserCard";
 
 const STREAM_API_KEY = import.meta.env.VITE_STREAM_API_KEY;
 
@@ -15,9 +18,20 @@ const HomePage = () => {
 	const [loadingChannels, setLoadingChannels] = useState(true);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
+	const { data: recommendedUsers, isLoading: isLoadingUsers } = useQuery({
+		queryKey: ["recommendedUsers"],
+		queryFn: getRecommendedUsers,
+		enabled: !!authUser,
+	});
+
+	const { data: outgoingRequests, isLoading: isLoadingRequests } = useQuery({
+		queryKey: ["outgoingRequests"],
+		queryFn: getOutgoingFriendReqs,
+		enabled: !!authUser,
+	});
+
 	useEffect(() => {
 		if (!authUser) return;
-
 		const client = StreamChat.getInstance(STREAM_API_KEY);
 
 		const connectAndFetch = async () => {
@@ -25,11 +39,11 @@ const HomePage = () => {
 				if (!client.userID) {
 					const tokenData = await getStreamToken();
 					const userToConnect = {
-                        id: authUser._id,
-                        name: authUser.fullName,
-                        image: authUser.profilePic,
-                        completedTasksCount: authUser.completedTasksCount || 0,
-                    };
+						id: authUser._id,
+						name: authUser.fullName,
+						image: authUser.profilePic,
+						completedTasksCount: authUser.completedTasksCount || 0,
+					};
 					await client.connectUser(userToConnect, tokenData.token);
 				}
 
@@ -55,6 +69,9 @@ const HomePage = () => {
 		return partner?.user;
 	};
 
+	const outgoingRequestIds = new Set(outgoingRequests?.map((req) => req.recipient._id));
+	const isLoading = loadingChannels || isLoadingUsers || isLoadingRequests;
+
 	return (
 		<div className='p-4 sm:p-6 lg:p-8'>
 			{isModalOpen && <CreateGroupChatModal onClose={() => setIsModalOpen(false)} />}
@@ -62,7 +79,6 @@ const HomePage = () => {
 				<div className='flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4'>
 					<h1 className='text-2xl sm:text-3xl font-bold tracking-tight'>Mis Chats</h1>
 					<div className='flex gap-2'>
-						{/* Ya no necesitamos el botón de "Encontrar Amigos" aquí si lo prefieres */}
 						<button className='btn btn-primary btn-sm' onClick={() => setIsModalOpen(true)}>
 							<MessageSquarePlus className='mr-2 size-4' />
 							Crear Chat Grupal
@@ -70,7 +86,7 @@ const HomePage = () => {
 					</div>
 				</div>
 
-				{loadingChannels ? (
+				{isLoading ? (
 					<div className='flex justify-center py-12'>
 						<span className='loading loading-spinner loading-lg' />
 					</div>
@@ -86,6 +102,7 @@ const HomePage = () => {
 											to={`/chat/${channel.id}`}
 											className='card bg-base-200 hover:shadow-md transition-shadow p-4'
 										>
+											{/* --- CÓDIGO RESTAURADO --- */}
 											<div className='flex items-center gap-3'>
 												<div className='avatar placeholder'>
 													<div className='bg-neutral-focus text-neutral-content rounded-full w-12'>
@@ -118,6 +135,7 @@ const HomePage = () => {
 												to={`/chat/${channel.id}`}
 												className='card bg-base-200 hover:shadow-md transition-shadow p-4'
 											>
+												{/* --- CÓDIGO RESTAURADO --- */}
 												<div className='flex items-center gap-3'>
 													<div className='avatar'>
 														<div className='w-12 rounded-full'>
@@ -141,9 +159,27 @@ const HomePage = () => {
 							</section>
 						)}
 
-						{channels.length === 0 && !loadingChannels && (
-							<div className='text-center py-10'>No tienes chats aún. ¡Crea un grupo o agrega amigos!</div>
-						)}
+						<section>
+							<h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+								<UsersIcon className="size-5" />
+								Encuentra Nuevos Amigos
+							</h2>
+							{recommendedUsers && recommendedUsers.length > 0 ? (
+								<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+									{recommendedUsers.map((user) => (
+										<UserCard
+											key={user._id}
+											user={user}
+											isRequestSent={outgoingRequestIds.has(user._id)}
+										/>
+									))}
+								</div>
+							) : (
+								<div className="text-center py-10 bg-base-200 rounded-lg">
+									<p>¡Parece que ya has agregado a todos! No hay nuevos usuarios que mostrar.</p>
+								</div>
+							)}
+						</section>
 					</>
 				)}
 			</div>
