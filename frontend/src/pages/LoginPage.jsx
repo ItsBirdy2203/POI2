@@ -55,9 +55,9 @@ const LoginPage = () => {
             <form onSubmit={handleLogin}>
               <div className="space-y-4">
                 <div>
-                  <h2 className="text-xl font-semibold">Welcome Back</h2>
+                  <h2 className="text-xl font-semibold">Bienvenido de nuevo</h2>
                   <p className="text-sm opacity-70">
-                    Sign in to your account to continue your language journey
+                   Inicia sesión en tu cuenta para continuar tu viaje lingüístico.
                   </p>
                 </div>
 
@@ -78,7 +78,7 @@ const LoginPage = () => {
 
                   <div className="form-control w-full space-y-2">
                     <label className="label">
-                      <span className="label-text">Password</span>
+                      <span className="label-text">Contraseña</span>
                     </label>
                     <input
                       type="password"
@@ -124,9 +124,9 @@ const LoginPage = () => {
             </div>
 
             <div className="text-center space-y-3 mt-6">
-              <h2 className="text-xl font-semibold">Connect with language partners worldwide</h2>
+              <h2 className="text-xl font-semibold">Conéctese con socios lingüísticos de todo el mundo</h2>
               <p className="opacity-70">
-                Practice conversations, make friends, and improve your language skills together
+                Practica conversaciones, haz amigos y mejoren sus habilidades lingüísticas juntos.
               </p>
             </div>
           </div>
