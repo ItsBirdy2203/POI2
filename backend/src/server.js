@@ -16,11 +16,14 @@ const PORT = process.env.PORT;
 
 const __dirname = path.resolve();
 
+// Obtén la URL del frontend de las variables de entorno para producción
+const corsOrigin = process.env.NODE_ENV === "production" 
+    ? process.env.FRONTEND_URL // Usaremos una variable de entorno
+    : "http://localhost:5173";
+
 app.use(
   cors({
-    origin: process.env.NODE_ENV === "production" 
-              ? process.env.CORS_ORIGIN 
-              : "http://localhost:5173",
+    origin: corsOrigin, // Usa la variable
     credentials: true,
   })
 );
