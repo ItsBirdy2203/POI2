@@ -84,12 +84,12 @@ export async function login(req, res) {
       expiresIn: "7d",
     });
 
-    res.cookie("jwt", token, {
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-      httpOnly: true, // prevent XSS attacks,
-      sameSite: "strict", // prevent CSRF attacks
-      secure: process.env.NODE_ENV === "production",
-    });
+  res.cookie("jwt", token, {
+  maxAge: 7 * 24 * 60 * 60 * 1000, // 7 días
+  httpOnly: true, // Previene ataques XSS
+  secure: process.env.NODE_ENV === "production", // Solo se envía sobre HTTPS en producción
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "strict", // "none" para permitir cross-site, "strict" para desarrollo
+});
 
     res.status(200).json({ success: true, user });
   } catch (error) {
