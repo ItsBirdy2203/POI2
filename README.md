@@ -78,16 +78,3 @@ La aplicación está desplegada en **Render** y puedes probarla aquí:
 - Render (deploy del frontend y backend)
 
 ---
-
-## 👨‍💻 Autor
-
-- **Tu nombre** — [GitHub](https://github.com/tuusuario)
-
----
-
-## 🖼️ Notas sobre imágenes
-
-Asegúrate de subir tus capturas al repositorio en una carpeta, por ejemplo: `/screenshots`, y reemplaza las líneas como esta:
-
-```markdown
-📸 **Captura 1**
