@@ -17,8 +17,8 @@ MessageChat permite crear un usuario ingresando tus datos básicos, los cuales s
 - Datos almacenados de forma segura en MongoDB.
 - Inicia sesión desde cualquier dispositivo.
 
-📸 **![Texto alternativo](./img/image1.png)**  
-📸 **Captura 2**
+**![Texto alternativo](./img/image1.png)**  
+**![Texto alternativo](./img/image2.png)** 
 
 ---
 
@@ -28,7 +28,7 @@ MessageChat permite crear un usuario ingresando tus datos básicos, los cuales s
 - Chats privados y grupales.
 - Chats grupales requieren mínimo 3 personas para crearse.
 
-📸 **Captura 3**
+**![Texto alternativo](./img/image3.png)** 
 
 ---
 
@@ -41,8 +41,8 @@ MessageChat permite crear un usuario ingresando tus datos básicos, los cuales s
   - Reaccionar con emojis
   - Charlar en voz
 
-📸 **Captura 4**  
-📸 **Captura 5**
+**![Texto alternativo](./img/image4.png)**  
+**![Texto alternativo](./img/image5.jpg)** 
 
 ---
 
@@ -55,8 +55,8 @@ En los chats grupales puedes:
 - Completa tareas para ganar ⭐ estrellas.
 - Las estrellas se otorgan con base en cantidad y nivel de dificultad.
 
-📸 **Captura 6**  
-📸 **Captura 7**
+**![Texto alternativo](./img/image6.png)**  
+**![Texto alternativo](./img/image7.png)** 
 
 ---
 
