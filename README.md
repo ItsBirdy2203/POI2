@@ -17,7 +17,7 @@ MessageChat permite crear un usuario ingresando tus datos básicos, los cuales s
 - Datos almacenados de forma segura en MongoDB.
 - Inicia sesión desde cualquier dispositivo.
 
-📸 **Captura 1**  
+📸 **![Texto alternativo](./img/image1.png)**  
 📸 **Captura 2**
 
 ---
